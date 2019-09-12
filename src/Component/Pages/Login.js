@@ -67,11 +67,12 @@ export default class LoginPage extends Component {
     
     userLogin = (e) => {
         e.preventDefault();
+        console.log(this.state.email,this.state.password)
 
-        console.log(this.state)
-        axios.post('/login', {email:this.state.email,password:this.state.password})
+        // console.log(this.state)
+        axios.post('http://localhost:2000/login', {email:this.state.email,password:this.state.password})
         .then((data)=>{
-            console.log("this is history",data.data)
+            // console.log("this is history",data)
             if(data.data.length>100){
                 this.setState({
                     token:data.data,
@@ -80,8 +81,8 @@ export default class LoginPage extends Component {
             this.props.isLogged(data.data)
             }
             else{
-                // console.log('this data does not exists')
-                swal("This data does not exists!", "...and here's the text!","error")
+                console.log('this data does not exists')
+                swal("This data does not exists!", "...L lelo!","error")
             }
             
         })

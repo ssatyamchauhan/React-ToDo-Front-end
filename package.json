@@ -2,15 +2,13 @@
   "name": "todo",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://ssatyamchauhan.github.io/ReactJsTodoApp/",
-  "proxy": "http://localhost:2000",
   "dependencies": {
     "@material-ui/core": "^4.4.0",
     "@material-ui/icons": "^4.2.1",
     "array-unique": "^0.3.2",
     "axios": "^0.19.0",
     "font-awesome": "^4.7.0",
-    "gh-pages": "^2.1.1",
+    "http-proxy-middleware": "^0.20.0",
     "material-ui": "^0.20.2",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
@@ -23,9 +21,8 @@
     "start": "react-scripts start --ignore client",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "production": "npm run build && serve -s build"
   },
   "eslintConfig": {
     "extends": "react-app"
