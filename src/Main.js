@@ -1,35 +1,43 @@
 import React from 'react'
 import App from './Component/App';
 import Login from './Component/Pages/Login';
+import Signup from './Component/Pages/Signup';
+import Recover from './Component/Pages/Forget';
+import Reset from './Component/Pages/Reset'
+// import ls from 'local-storage';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+
+
+// export default class Main extends React.Component{
+
+//     render(){
+//         if(ls.get('credentials') === undefined || ls.get('credentials') === null){
+//             var a = <Login />
+//         }
+//         else{
+//             a = <App  tokenState={ls.get('credentials')}/>
+//         }
+//         return(a)
+//     }
+// }
 
 
 export default class Main extends React.Component{
-
-    constructor(props){
-        super(props)
-        this.state={
-            jwt:''
-        }
-    }
-
-
-    isLogged = (props) =>{
-        console.log(props)
-        this.setState({
-            jwt:props
-        })
-    }
-
-
-
+    
     render(){
-        if(this.state.jwt === ''){
-            var a = <Login isLogged={this.isLogged}/>
-        }
-        else{
-            a = <App  tokenState={this.state.jwt}/>
-        }
-        return(a)
+        return (
+            <Router>
+                {/* <Route exact path='/' component={App}  /> */}
+                <Route path='/' exact component={App}  />
+                <Route path='/login' component={Login} />
+                <Route path='/todos'  component={App}  />
+                <Route path='/signup' component={Signup} />
+                <Route path='/recover' component={Recover} />
+                <Route path='/reset' component={Reset} />
+            </Router>
+        )
     }
-}
 
+
+
+}

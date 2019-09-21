@@ -1,9 +1,40 @@
 body{
   margin:0;
   padding: 0;
+  background-image: url("https://pixinvent.com/materialize-material-design-admin-template/app-assets/images/gallery/flat-bg.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
+/* input {
+  background-color: rgba(0,0,0,0.1);
+  color: rgb(8, 7, 8);
+  border: none;
+  width: 250px;
+  height: 30px;
+  padding-top: 20px;
+  font-size: 30px;
+}
 
+.inputEdit{
+  border: none;
+  width: 700px;
+  height: 30px;
+} */
+/* .list{
+  margin-top: -15px;
+  background-color: rgb(226, 157, 157);
+} */
+li{
+  background-color: rgb(221, 224, 179);
+  padding: 10px;
+  border: 1px solid black;
+  top: 0; bottom : 0; right: 0; left: 0;
+  font-size: 30px; 
+  cursor: pointer;
+}
+
+/* 
 .stats{
   display: flex;
   justify-content: space-around;
@@ -65,4 +96,4 @@ li{
     -webkit-user-select: none;
     -ms-user-select: none;
     user-select: none;
-}
+} */

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ls from 'local-storage';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -13,6 +14,8 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import axios from 'axios';
 import swal from 'sweetalert';
+import { Redirect, Link as Links } from 'react-router-dom';
+import { GoogleLogin } from 'react-google-login';
 
 
 function Copyright() {
@@ -40,7 +43,7 @@ export default class LoginPage extends Component {
         }
     }
     changeHandler = (e) =>{
-            console.log(e.target.id)
+            // console.log(e.target.id)
                 if(e.target.id==='email'){
                     this.setState({
                         email:e.target.value
@@ -54,35 +57,26 @@ export default class LoginPage extends Component {
                 
             }
 
-
-    // postData = () =>{
-        //     axios.post('/signup',{email:this.state.email,password:this.state.password})
-        //     .then(() =>{console.log('jwt-created successfully!')})
-        //     .catch((err) => console.log('this data is already exists'))
-        //     this.setState({
-        //         email:'',
-        //         password:''
-        //     })
-        // }
     
     userLogin = (e) => {
-        e.preventDefault();
-        console.log(this.state.email,this.state.password)
 
+        e.preventDefault();
         // console.log(this.state)
+
         axios.post('http://localhost:2000/login', {email:this.state.email,password:this.state.password})
         .then((data)=>{
-            // console.log("this is history",data)
+
             if(data.data.length>100){
+                ls.set('credentials',data.data)
+                console.log('this is backend data',data)
                 this.setState({
                     token:data.data,
                     isLoggedIn:true
             })
-            this.props.isLogged(data.data)
             }
             else{
                 console.log('this data does not exists')
-                swal("This data does not exists!", "...L lelo!","error")
+                swal("This data does not exists!", "You have entered wrong credentials...!","error")
             }
             
         })
@@ -94,77 +88,123 @@ export default class LoginPage extends Component {
         })
     }
 
+    responseGoogle = (response) => {
+        console.log(response.tokenObj);
+        axios.post('http://localhost:2000/googleSign',response.tokenObj)
+        .then(data => {
+            console.log(data.data.length)
+            if(data.data.length>100){
+
+                ls.set('credentials',data.data)
+                console.log('this is google backend data',data.data)
+                this.setState({
+                    token:data.data,
+                    isLoggedIn:true
+            })
+            }
+            else{
+                console.log('this data does not exists')
+                swal("This data does not exists!", "You have entered wrong credentials...!","error")
+            }
+        })
+        .catch(err => {swal("This data does not exists!", "...and here's the text!")})
+      }
+
+    // forget = () => {
+    //     console.log('forget is called')
+    //     this.setState({
+    //         recover:true
+    //     })
+    // }
+
+
     render(){
+        if(this.state.isLoggedIn){
+            return <Redirect to='/todos' />
+        }
+        if(ls.get('credentials')){
+            return <Redirect to='/todos' />
+        }
+        if(this.state.recover){
+            return <Redirect to='/recover' />
+        }
         return (
             <Container component="main" maxWidth="xs">
-            <CssBaseline />
-            <div >
-                <Avatar >
-                <LockOutlinedIcon />
-                </Avatar>
-                <Typography component="h1" variant="h5">
-                Sign in
-                </Typography>
-                <form onSubmit={this.userLogin} noValidate>
-                <TextField
-                    variant="outlined"
-                    margin="normal"
-                    required
-                    fullWidth
-                    id="email"
-                    value={this.state.email} 
-                    onChange={this.changeHandler}
-                    label="Email Address"
-                    autoComplete="email"
-                    type="email"
-                    autoFocus
-                />
-                <TextField
+                <CssBaseline />
+                <div >
+                    <Avatar >
+                        <LockOutlinedIcon />
+    
+                    </Avatar>
+                    <Typography component="h1" variant="h5">
+                        Sign in
+                    </Typography>
+                    <form onSubmit={this.userLogin} >
+                        <TextField
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            id="email"
+                            value={this.state.email} 
+                            onChange={this.changeHandler}
+                            label="Email Address"
+                            autoComplete="email"
+                            type="email"
+                            autoFocus
+                        />
+                        <TextField
 
-                    required
-                    variant="outlined"
-                    margin="normal"
-                    fullWidth
-                    value={this.state.password} 
-                    onChange={this.changeHandler}
-                    // name="password"
-                    label="Password"
-                    type="password"
-                    id="password"
-                    autoFocus
-                    // autoComplete="current-password"
+                            required
+                            variant="outlined"
+                            margin="normal"
+                            fullWidth
+                            value={this.state.password} 
+                            onChange={this.changeHandler}
+                            // name="password"
+                            label="Password"
+                            type="password"
+                            id="password"
+                            autoFocus
+                            // autoComplete="current-password"
+                        />
+                    
+                        <FormControlLabel
+                            control={<Checkbox value="remember" color="primary" />}
+                            label="Remember me"
+                        />
+                        <Button
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            color="primary"
+                            onClick={this.userLogin}>
+                            Sign In
+                        </Button>
+                        <Grid container>
+                            <Grid item xs>
+                                <Links to="/recover" variant="body2">
+                                    Forgot password?
+                                </Links>
+                            </Grid>
+                            <Grid item>
+                                <Links to="/signup" >
+                                    Don't have an account? Sign Up
+                                </Links>
+                            </Grid>
+                        </Grid>
+                    </form>
+                </div>
+                <GoogleLogin
+                    clientId="673375738955-hio20gpguhrdlddbdl8a60da9de4qc9j.apps.googleusercontent.com"
+                    buttonText="Login"
+                    onSuccess={this.responseGoogle}
+                    onFailure={this.responseGoogle}
+                    // cookiePolicy={'single_host_origin'}
                 />
-               
-                <FormControlLabel
-                    control={<Checkbox value="remember" color="primary" />}
-                    label="Remember me"
-                />
-                <Button
-                    type="submit"
-                    fullWidth
-                    variant="contained"
-                    color="primary"
-                    onClick={this.userLogin}
-                >
-                    Sign In
-                </Button>
-                <Grid container>
-                    <Grid item xs>
-                    <Link href="#" variant="body2">
-                        Forgot password?
-                    </Link>
-                    </Grid>
-                    <Grid item>
-                    <Link href="#" variant="body2">
-                        {"Don't have an account? Sign Up"}
-                    </Link>
-                    </Grid>
-                </Grid>
-                </form>
-            </div>
-            <Box mt={8}>
-                <Copyright />
-            </Box>
+                <Box mt={8}>
+                    <Copyright />
+                </Box>
             </Container>
         );
     }

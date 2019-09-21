@@ -26,10 +26,10 @@ export default function Lists(props) {
     // console.log(props)
     const todos = props.itemList.filter((it) => {
         if ( listState === 'pending' ) {
-            // it.done === 1 ? it.done = true : it.done = false;
+            it.done === 1 ? it.done = true : it.done = false;
             return !it.done;
         } else if ( listState === 'done') {
-          // it.done === 1 ? it.done = true : it.done = false;            
+          it.done === 1 ? it.done = true : it.done = false;            
           return it.done;
         } else {
             it.done ? it.done = true : it.done = false;
