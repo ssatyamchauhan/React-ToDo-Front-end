@@ -52,6 +52,7 @@ export default class Reset extends Component{
                 }
                 else{
                     swal("Your password is change successfully!", "Go to login page","success")
+                    this.setState({reset:false})
                 }
             })
             .catch(err => console.log(err))

@@ -131,6 +131,7 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
+import { Link as Links } from 'react-router-dom'
 
 const useStyles = makeStyles(theme => ({
   grow: {
@@ -216,6 +217,7 @@ export default function Stats(props) {
     
   }
 
+
   function handleMenuClose() {
     setAnchorEl(null);
     handleMobileMenuClose();
@@ -236,7 +238,7 @@ export default function Stats(props) {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem >Profile</MenuItem>
+      <MenuItem onClick={props.profile}><Links to="/profile">Profile</Links></MenuItem>
       <MenuItem onClick={loggingOut}>Logout</MenuItem>
     </Menu>
   );
@@ -280,7 +282,9 @@ export default function Stats(props) {
         >
           <AccountCircle />
         </IconButton>
-        <p>Profile</p>
+        <Links to="/profile">
+          Profile 
+        </Links>
       </MenuItem>
     </Menu>
   );

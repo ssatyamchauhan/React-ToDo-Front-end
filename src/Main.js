@@ -3,7 +3,8 @@ import App from './Component/App';
 import Login from './Component/Pages/Login';
 import Signup from './Component/Pages/Signup';
 import Recover from './Component/Pages/Forget';
-import Reset from './Component/Pages/Reset'
+import Reset from './Component/Pages/Reset';
+import Profile from './Component/Pages/Profile'
 // import ls from 'local-storage';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
@@ -34,6 +35,7 @@ export default class Main extends React.Component{
                 <Route path='/signup' component={Signup} />
                 <Route path='/recover' component={Recover} />
                 <Route path='/reset' component={Reset} />
+                <Route path='/profile' component={Profile} />
             </Router>
         )
     }

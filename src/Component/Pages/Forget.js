@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { ValidatorForm } from 'react-material-ui-form-validator';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import { Redirect }  from 'react-router-dom';
+import { Redirect, Link as Links }  from 'react-router-dom';
 import { Grid } from '@material-ui/core';
 import ls from 'local-storage'
 import swal from 'sweetalert';
@@ -50,22 +50,23 @@ export default class Recover extends Component{
         })
     }
 
-    forget = () =>{
+    forget = (e) =>{
+
         
-        console.log('forget password is requested by user!')
-        if(this.state.email){
-            axios
-                .post('http://localhost:2000/forget',{email:this.state.email})
-                .then(data => {console.log(data)})
-                .catch(err => console.log(err))
-                this.setState({
-                    forget:true
-                })
-                swal("Check your email!", "Reset password link has sent to your email address!","success")
-        }
-        else{
-            swal("Enter your Email firts!", "Hey Enter your email!","error")
-        }
+        console.log('forget password is requested by user!', e.target.label)
+            if(this.state.email){
+                axios
+                    .post('http://localhost:2000/forget',{email:this.state.email})
+                    .then(data => {console.log(data)})
+                    .catch(err => console.log(err))
+                    this.setState({
+                        forget:true
+                    })
+                    swal("Check your email!", "Reset password link has sent to your email address!","success")
+            }
+            else{
+                swal("Enter your Email firts!", "Hey Enter your email!","error")
+            }
     }
 
     render(){
@@ -104,11 +105,16 @@ export default class Recover extends Component{
                             type="submit"
                             variant="contained"
                             fullWidth
+                            label="forget"
                             color="primary"
                             onClick={this.userLogin}>
                             Forget Password
                         </Button>
+                        
                     </ValidatorForm>
+                    <Links to="/login" >
+                        Back to login page
+                    </Links>
                 </form>
             </Grid>            
         )

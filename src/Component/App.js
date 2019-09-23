@@ -166,14 +166,18 @@ export default class App extends Component{
         })
         
     }
+    profile = () => {
+        
+        
+    }   
        render(){
             if(!this.state.isLoggedIn){
                return <Redirect to='/login' />
             }
             return (
                 <div>
-                    <Stats checkbox={this.checkbox} listShouldbe={this.listShouldbe} itemList={this.state.itemList} count={this.state.count} logOut={this.logOut} />
-                    <Todo  todo={this.state.item} onChangeHandler={this.onChangeHandler} addItem={this.addItem}/>
+                    <Stats checkbox={this.checkbox} listShouldbe={this.listShouldbe} itemList={this.state.itemList} count={this.state.count} logOut={this.logOut} profile={this.profile}/>
+                    <Todo  todo={this.state.item} onChangeHandler={this.onChangeHandler} addItem={this.addItem} />
                     <Lists  addItem={this.addItem} onChangeHandler={this.onChangeHandler} itemList=       {this.state.itemList} defaultList={this.state.defaultList} checkbox={this.checkbox} DoubleClick={this.DoubleClick} editText={this.state.editText} editId={this.state.editId} delete={this.delete}/>
                 </div>
         )
