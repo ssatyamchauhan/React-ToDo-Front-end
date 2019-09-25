@@ -196,7 +196,7 @@ export default class LoginPage extends Component {
                     </form>
                 </div>
                 <GoogleLogin
-                    clientId="673375738955-hio20gpguhrdlddbdl8a60da9de4qc9j.apps.googleusercontent.com"
+                    clientId="Your google client id goes here"
                     buttonText="Login"
                     onSuccess={this.responseGoogle}
                     onFailure={this.responseGoogle}
