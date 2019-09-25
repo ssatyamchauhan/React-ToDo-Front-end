@@ -8,6 +8,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 Hi, this is the front-end part of React-Todo App. In this I have written code to add your daily bases agenda, can edit agenda, mark as done and can also delete. This is fully implemented with signup, login, forget password, google sign up and login.
 This is fully code in React and backend is in node [Backend](https://github.com/ssatyamchauhan/React-ToDo-Backend). 
 
+## Changes
+A small change will take place that is in /src/Componenet/Pages <br>
+In Login.js at line 199 you need to enter your own google client id. 
+
 ## Requirements
 For linux user:<br>
 All you need to installed node and git in your system .<br>
