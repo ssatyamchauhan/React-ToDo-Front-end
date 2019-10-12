@@ -4,7 +4,7 @@ Implemented with material-ui, react-component and nodejs as backend <br>
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Desciption
+## Description
 Hi, this is the front-end part of React-Todo App. In this I have written code to add your daily bases agenda, can edit agenda, mark as done and can also delete. This is fully implemented with signup, login, forget password, google sign up and login.
 This is fully code in React and backend is in node [Backend](https://github.com/ssatyamchauhan/React-ToDo-Backend). 
 
