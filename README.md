@@ -30,5 +30,5 @@ Open your browser type http://localhost:5000<br>
 Make sure your [Backend](https://github.com/ssatyamchauhan/React-ToDo-Backend) server also run at the same time.<br>
 
 ### Demo
-[App Demo](http://reacttodo.ml)
+[App Demo](https://todo.learnreact.ml)
 
